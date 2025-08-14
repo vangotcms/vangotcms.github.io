@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VangotCMS - 现代化网站内容管理系统</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        dark: '#1E293B',
+                        light: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .transition-transform {
+                transition-property: transform;
+                transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+                transition-duration: 300ms;
+            }
+            .hover-lift {
+                @apply hover:-translate-y-1 transition-all duration-300;
+            }
+        }
+    </style>
+</head>
+<body class="bg-light text-dark antialiased">
+    <!-- 导航栏 -->
+    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/90 backdrop-blur-sm shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fa fa-cubes text-primary text-2xl"></i>
+                    <span class="text-xl font-bold text-primary">VangotCMS</span>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#intro" class="text-dark hover:text-primary transition-colors">简介</a>
+                    <a href="#features" class="text-dark hover:text-primary transition-colors">功能特点</a>
+                    <a href="#advantages" class="text-dark hover:text-primary transition-colors">技术优势</a>
+                    <a href="#usage" class="text-dark hover:text-primary transition-colors">使用指南</a>
+                    <a href="#domain" class="text-dark hover:text-primary transition-colors">域名设置</a>
+                </nav>
+                <button class="md:hidden text-dark" id="menuToggle">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+                <a href="#intro" class="text-dark hover:text-primary py-2 transition-colors">简介</a>
+                <a href="#features" class="text-dark hover:text-primary py-2 transition-colors">功能特点</a>
+                <a href="#advantages" class="text-dark hover:text-primary py-2 transition-colors">技术优势</a>
+                <a href="#usage" class="text-dark hover:text-primary py-2 transition-colors">使用指南</a>
+                <a href="#domain" class="text-dark hover:text-primary py-2 transition-colors">域名设置</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="pt-28 pb-20 bg-gradient-to-br from-blue-50 to-indigo-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight text-shadow mb-6">
+                        VangotCMS<br>
+                        <span class="text-primary">现代化网站内容管理系统</span>
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-8 max-w-lg">
+                        简单、高效、灵活的开源CMS解决方案，帮助您快速构建和管理各类网站，无需复杂的技术知识。
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#features" class="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition-all">
+                            了解功能 <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="https://github.com/vangot" target="_blank" class="bg-white hover:bg-gray-50 text-dark border border-gray-300 px-6 py-3 rounded-lg font-medium shadow-sm hover:shadow transition-all">
+                            <i class="fa fa-github mr-2"></i> 访问仓库
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 relative">
+                    <div class="relative z-10 bg-white rounded-xl shadow-xl p-1 transform rotate-1 hover:rotate-0 transition-all duration-500">
+                        <img src="https://picsum.photos/id/0/600/400" alt="VangotCMS系统界面展示" class="rounded-lg w-full h-auto">
+                    </div>
+                    <div class="absolute top-10 -right-5 w-full h-full bg-primary/20 rounded-xl -z-10 transform -rotate-3"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 简介部分 -->
+    <section id="intro" class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4">系统简介</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">VangotCMS是一款基于现代Web技术开发的内容管理系统，旨在为开发者和内容创作者提供简单高效的网站搭建和管理工具。</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl p-8 shadow-sm hover:shadow-md transition-all hover-lift">
+                    <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-code text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">开源免费</h3>
+                    <p class="text-gray-600">完全开源的项目，基于MIT许可证发布，您可以自由使用、修改和分发，无需支付任何许可费用。</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-8 shadow-sm hover:shadow-md transition-all hover-lift">
+                    <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-bolt text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">简单高效</h3>
+                    <p class="text-gray-600">简洁直观的用户界面，让您能够快速上手，专注于内容创作而非技术细节。</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-8 shadow-sm hover:shadow-md transition-all hover-lift">
+                    <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-puzzle-piece text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">灵活扩展</h3>
+                    <p class="text-gray-600">丰富的插件系统和API接口，让您可以根据需求扩展系统功能，定制专属解决方案。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 功能特点 -->
+    <section id="features" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4">功能特点</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">VangotCMS提供了丰富的功能，满足各类网站的建设和管理需求。</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+                <div>
+                    <img src="https://picsum.photos/id/180/600/400" alt="内容管理功能展示" class="rounded-xl shadow-lg w-full h-auto">
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                        <span class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fa fa-file-text-o text-primary"></i>
+                        </span>
+                        强大的内容管理
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                            <span>直观的富文本编辑器，支持图文混排、表格、代码块等多种内容格式</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                            <span>完善的内容版本控制，随时查看和恢复历史版本</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                            <span>自定义内容类型和字段，适应不同场景的内容管理需求</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                            <span>支持内容草稿、预览和定时发布功能</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center md:flex-row-reverse">
+                <div>
+                    <img src="https://picsum.photos/id/3/600/400" alt="主题与模板功能展示" class="rounded-xl shadow-lg w-full h-auto">
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                        <span class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fa fa-paint-brush text-primary"></i>
+                        </span>
+                        灵活的主题与模板
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                            <span>支持多主题切换，一键更换网站外观</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                            <span>基于组件的模板系统，易于定制和扩展</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                            <span>响应式设计，自动适配各种设备屏幕</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                            <span>自定义CSS和JavaScript，实现个性化效果</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技术优势 -->
+    <section id="advantages" class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4">技术优势</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">VangotCMS采用现代化的技术栈，确保系统的高性能、安全性和可扩展性。</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-gray-50 rounded-lg p-6 text-center hover-lift">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-bolt text-primary"></i>
+                    </div>
+                    <h4 class="font-semibold mb-2">高性能</h4>
+                    <p class="text-sm text-gray-600">优化的数据库查询和缓存机制，确保网站快速响应</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-lg p-6 text-center hover-lift">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-shield text-primary"></i>
+                    </div>
+                    <h4 class="font-semibold mb-2">安全性</h4>
+                    <p class="text-sm text-gray-600">多重安全防护措施，防止常见的网络攻击</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-lg p-6 text-center hover-lift">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-mobile text-primary text-xl"></i>
+                    </div>
+                    <h4 class="font-semibold mb-2">移动优先</h4>
+                    <p class="text-sm text-gray-600">完全响应式设计，提供出色的移动设备体验</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-lg p-6 text-center hover-lift">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-database text-primary"></i>
+                    </div>
+                    <h4 class="font-semibold mb-2">数据安全</h4>
+                    <p class="text-sm text-gray-600">自动备份和恢复功能，保障数据安全可靠</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 使用指南 -->
+    <section id="usage" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4">使用指南</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">快速了解如何获取和部署VangotCMS系统。</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="p-8">
+                    <h3 class="text-xl font-semibold mb-6">获取源码</h3>
+                    <p class="mb-4">从Gitee仓库克隆VangotCMS源码：</p>
+                    <div class="bg-gray-900 text-gray-300 p-4 rounded-lg mb-6 overflow-x-auto">
+                        <code>git clone https://github.com/vangot/vangotcms.git</code>
+                    </div>
+
+                    <h3 class="text-xl font-semibold mb-6">安装部署</h3>
+                    <ol class="space-y-4 mb-6">
+                        <li class="flex items-start">
+                            <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">1</span>
+                            <div>
+                                <p class="font-medium">环境要求</p>
+                                <p class="text-gray-600">PHP 7.4+，MySQL 5.7+，Apache或Nginx服务器</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">2</span>
+                            <div>
+                                <p class="font-medium">配置数据库</p>
+                                <p class="text-gray-600">创建数据库并修改config/database.php配置文件</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">3</span>
+                            <div>
+                                <p class="font-medium">运行安装脚本</p>
+                                <p class="text-gray-600">访问http://yourdomain/install.php，按照提示完成安装</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">4</span>
+                            <div>
+                                <p class="font-medium">登录管理后台</p>
+                                <p class="text-gray-600">安装完成后，访问http://yourdomain/admin登录管理后台</p>
+                            </div>
+                        </li>
+                    </ol>
+
+                    <a href="https://github.com/vangot/vangotcms/wikis" target="_blank" class="inline-flex items-center text-primary hover:text-primary/80 font-medium">
+                        查看完整文档 <i class="fa fa-external-link ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fa fa-cubes text-primary text-2xl"></i>
+                        <span class="text-xl font-bold">VangotCMS</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">现代化网站内容管理系统，简单、高效、灵活。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fa fa-github text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fa fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fa fa-linkedin text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">快速链接</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#intro" class="text-gray-400 hover:text-white transition-colors">系统简介</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition-colors">功能特点</a></li>
+                        <li><a href="#advantages" class="text-gray-400 hover:text-white transition-colors">技术优势</a></li>
+                        <li><a href="#usage" class="text-gray-400 hover:text-white transition-colors">使用指南</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">资源</h4>
+                    <ul class="space-y-2">
+                        <li><a href="https://github.com/vangot/vangotcms/wikis" target="_blank" class="text-gray-400 hover:text-white transition-colors">文档中心</a></li>
+                        <li><a href="https://github.com/vangot/vangotcms/issues" target="_blank" class="text-gray-400 hover:text-white transition-colors">问题反馈</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">API参考</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">插件市场</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">联系我们</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fa fa-envelope-o text-primary mt-1 mr-3"></i>
+                            <span class="text-gray-400">contact@vangotcms.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-github text-primary mt-1 mr-3"></i>
+                            <span class="text-gray-400">github.com/vangot</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
+                <p>&copy; 2023 VangotCMS. 保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-6 right-6 bg-primary hover:bg-primary/90 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // 移动端菜单切换
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2', 'shadow');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-2', 'shadow');
+            }
+        });
+
+        // 返回顶部按钮
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.add('opacity-0', 'invisible');
+                backToTopButton.classList.remove('opacity-100', 'visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // 关闭移动菜单（如果打开）
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    const navbarHeight = navbar.offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 图片加载动画
+        document.addEventListener('DOMContentLoaded', () => {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.classList.add('opacity-0', 'transition-opacity', 'duration-500');
+                img.onload = function() {
+                    this.classList.remove('opacity-0');
+                    this.classList.add('opacity-100');
+                }
+                // 如果图片已经缓存
+                if (img.complete) {
+                    img.classList.remove('opacity-0');
+                    img.classList.add('opacity-100');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
